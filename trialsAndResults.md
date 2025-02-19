@@ -41,15 +41,15 @@
 - **mAP50**: 65.3%
 - **mAP50-95**: 22.1%
 
-  ### YOLOv11m-seg Training and Validation Results (30 Epochs)
+# YOLOv11m-seg Training and Validation Results (30 Epochs)
 
-#### Box Detection (Object Detection)
+## Box Detection (Object Detection)
 - **Precision:** 0.81415
 - **Recall:** 0.74297
 - **mAP50:** 0.80115
 - **mAP50-95:** 0.63510
 
-#### Mask Segmentation
+## Mask Segmentation
 - **Precision:** 0.73389
 - **Recall:** 0.66667
 - **mAP50:** 0.66241
