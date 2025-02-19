@@ -1,4 +1,4 @@
-# YOLOv11s-SG (3 Epochs)
+# YOLOv11s-SG Validation Results (3 Epochs)
 
 ## Box Detection (Object Detection)
 - **Precision**: 31.5%
@@ -12,7 +12,7 @@
 - **mAP50**: 21.9%
 - **mAP50-95**: 5.08%
 
-# YOLOv11s-SG (10 Epochs)
+# YOLOv11s-SG Validation Results (10 Epochs)
 
 ## Box Detection (Object Detection)
 - **Precision**: 86.9%
