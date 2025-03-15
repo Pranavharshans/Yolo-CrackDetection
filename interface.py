@@ -1,9 +1,8 @@
 import streamlit as st
 import cv2
 import numpy as np
-import tempfile
 from ultralytics import YOLO
-from PIL import Image
+from PIL import Image, ImageDraw
 
 # Load YOLO model
 model = YOLO("model-path")  # Update with the correct model path
@@ -14,20 +13,18 @@ uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     # Convert uploaded file to OpenCV format
-    image = Image.open(uploaded_file)
+    image = Image.open(uploaded_file).convert("RGB")
     image_np = np.array(image)
-    
-    # Save the uploaded image temporarily
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
-        image.save(temp_file.name)
-        temp_image_path = temp_file.name
-    
-    # Perform inference
-    results = model(temp_image_path, save=True)
-    
-    # Load the processed image
-    result_image = cv2.imread(temp_image_path)
-    result_image = cv2.cvtColor(result_image, cv2.COLOR_BGR2RGB)
-    
-    st.image(image, caption="Uploaded Image", use_column_width=True)
-    st.image(result_image, caption="Processed Image", use_column_width=True)
+
+    # Perform inference directly on NumPy array
+    results = model(image_np)
+
+    # Draw bounding boxes on the image
+    for result in results:
+        draw = ImageDraw.Draw(image)
+        for box in result.boxes.xyxy:
+            x1, y1, x2, y2 = map(int, box)
+            draw.rectangle([x1, y1, x2, y2], outline="red", width=3)
+
+    # Display images
+    st.image(image, caption="Processed Image with Detections", use_column_width=True)
